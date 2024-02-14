@@ -1,0 +1,44 @@
+<div class="colums marginTop5 background">
+    <Span>Registrate</Span>
+    <form [formGroup]="singUpForm" class="forms marginTop padding">
+        <div>
+            Nombre <input
+            [class.is-invalid]="singUpForm.get('name')?.touched && singUpForm.get('name')?.invalid"
+            type="text"
+            class="form-control"
+            formControlerName="name">
+            Usuario <input
+            [class.is-invalid]="singUpForm.get('username')?.touched && singUpForm.get('username')?.invalid"
+            type="text"
+            class="form-control"
+            formControlerName="username">
+            Contraseña <input
+            [class.is-invalid]="singUpForm.get('password')?.touched && singUpForm.get('password')?.invalid"
+            type="password"
+            class="form-control"
+            formControlerName="password">
+        </div>
+        <div>
+            Apellido <input
+            [class.is-invalid]="singUpForm.get('lastname')?.touched && singUpForm.get('lastname')?.invalid"
+            type="text"
+            class="form-control"
+            formControlerName="lastname">
+            email <input
+            [class.is-invalid]="singUpForm.get('email')?.touched && singUpForm.get('email')?.invalid"
+            type="text"
+            class="form-control"
+            formControlerName="email">
+            Repita la Contraseña <input
+            [class.is-invalid]="singUpForm.get('password2')?.touched && singUpForm.get('password2')?.invalid"
+            type="password"
+            class="form-control"
+            formControlerName="password2">
+        </div>
+        <button class="primary button" type="submit">Registrarse</button>
+        <p class="info">
+            Si ya estas registrado
+            <a routerLink="/log-in"> Ingresa aqui</a>
+        </p>
+    </form>
+</div>

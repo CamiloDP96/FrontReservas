@@ -1,0 +1,23 @@
+<div class="colums marginTop5 background">
+    <span class="marginTop">Ingresar</span>
+    <form [formGroup]="loginForm" class="forms marginTop">
+        <div>
+            Usuario: <input
+            [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
+            type="text"
+            placeholder="Nombre de usuario"
+            class="form-control"
+            formControlName="username">
+            Contraseña <input
+            type="password"
+            placeholder="Contraseña"
+            class="form-control"
+            formControlName="userPassword">
+        </div>
+            <button class="primary button" type="submit">Ingresar</button>
+        <p class="info">
+            Si aun no tienes cuenta
+            <a routerLink="/sing-up"> Registrate aqui</a>
+        </p>
+    </form>
+</div>

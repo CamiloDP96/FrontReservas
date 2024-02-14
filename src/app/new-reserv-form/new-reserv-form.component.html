@@ -1,0 +1,32 @@
+<div class="colums margins">
+    <span class="margins">Nueva Reserva</span>
+    <form [formGroup]="newReserv" class="forms">
+        <div class="rows">
+            <div class="colums marginLeft marginRigth">
+                Usuario <input
+                type="text"
+                class="form-control"
+                formContolName="username">
+                Habitacion <input
+                type="text"
+                class="form-control"
+                formControlName="room">
+                Forma de pago <input
+                type="text"
+                class="form-controler"
+                formControlerName="payMethod">
+            </div>
+            <div class="colums marginLeft marginRigth">
+                Fecha llegada <input
+                type="date"
+                class="form-controler"
+                formCpntrolName="checkInDate">
+                Fecha salida <input
+                type="date"
+                class="form-controler"
+                formControlerName="checkOutDate">
+            </div>
+        </div>
+            <button class="primary button" type="submit">Reservar</button>
+        </form>
+    </div>

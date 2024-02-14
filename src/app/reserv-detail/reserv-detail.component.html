@@ -1,0 +1,22 @@
+<mat-card class="reserv-card margins">
+    <mat-card-header>
+        <mat-card-title>Reservacion 1</mat-card-title>
+        <mat-card-subtitle>Habitacion 101</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <div class="colums">
+                <p>tipo de habitacion: estandar</p>
+                <p>Precio por noche: $100</p>
+                <p>Tiempo Hospedado: 5 dias</p>
+                <p>Estado de la reserva: Activa</p>
+                <p>Fecha de ingreso: 20/02/2024</p>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="rows">
+        <button class="secondary button margins">Cancelar</button>
+        <a routerLink="/new-reservation">
+            <button class="secondary button margins">Editar</button>
+        </a>
+    </mat-card-actions>
+</mat-card>

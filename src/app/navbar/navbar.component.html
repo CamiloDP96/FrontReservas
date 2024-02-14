@@ -1,0 +1,28 @@
+<mat-toolbar class="navbar">
+    <button mat-icon-button class="navbar-icon" aria-label="navbar icon-button with menu icon" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <a routerLink="/reservation-details">
+            <button mat-menu-item>Mis Reservas</button>
+        </a>
+        <a routerLink="/bills">
+            <button mat-menu-item>Mis Facturas</button>
+        </a>
+        <button mat-menu-item>Cerrar sesion</button>
+    </mat-menu>
+    <a routerLink="/home">
+        <span>LHOTEL</span>
+    </a>
+    <span class="navbar-spacer"></span>
+    <a routerLink="/reservations">
+        <button class="secondary button marginLeft">
+            Reservas
+        </button>
+    </a>
+    <a routerLink="/log-in">
+        <button class="secondary button marginLeft">
+            Ingresar
+        </button>
+    </a>
+</mat-toolbar>
