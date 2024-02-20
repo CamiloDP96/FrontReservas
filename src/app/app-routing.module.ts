@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ReservationCardComponent } from './reservation-card/reservation-card.component';
 import { TerminosYCondicionesComponent } from './terminos-y-condiciones/terminos-y-condiciones.component';
 import { AbouthUsComponent } from './abouth-us/abouth-us.component';
+import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -30,19 +31,22 @@ const routes: Routes = [
   },
   {
     path: 'new-reservation',
-    component: NewReservFormComponent
+    component: NewReservFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reservation-details',
-    component: ReservDetailComponent
+    component: ReservDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reservations',
-    component: ReservationCardComponent
+    component: ReservationCardComponent,
   },
   {
     path: 'bills',
-    component: BillCardComponent
+    component: BillCardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'termyCond',

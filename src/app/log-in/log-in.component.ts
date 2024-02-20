@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { Credentials } from '../api.config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -8,11 +11,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LogInComponent {
 
-  constructor(){}
+  creds: Credentials = {
+    username: '',
+    password: ''
+  };
 
-  loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    userPassword: new FormControl('', Validators.required)
-  })
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ){}
 
+  login(form: NgForm) {
+    if (form.valid) {
+      // Serializar los datos del formulario a JSON
+      const body = JSON.stringify(this.creds);
+      // Enviar la solicitud HTTP al servicio de autenticación
+      this.authService.login(body)
+        .subscribe(response => {
+          this.router.navigate(['']);
+        });
+    }
+  }
 }

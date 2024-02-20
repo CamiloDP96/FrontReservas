@@ -1,20 +1,24 @@
 <div class="colums marginTop5 background">
     <span class="marginTop">Ingresar</span>
-    <form [formGroup]="loginForm" class="forms marginTop">
+    <form #form="ngForm" class="forms marginTop" (ngSubmit)="login(form)">
+        <div>
+            <h1>Inicio de sesion</h1>
+        </div>
         <div>
             Usuario: <input
-            [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
+            name="username"
             type="text"
             placeholder="Nombre de usuario"
             class="form-control"
-            formControlName="username">
+            [(ngModel)]="creds.username">
             Contraseña <input
+            name="password"
             type="password"
             placeholder="Contraseña"
             class="form-control"
-            formControlName="userPassword">
+            [(ngModel)]="creds.password">
         </div>
-            <button class="primary button" type="submit">Ingresar</button>
+            <button class="primary button" type="submit" >Ingresar</button>
         <p class="info">
             Si aun no tienes cuenta
             <a routerLink="/sing-up"> Registrate aqui</a>

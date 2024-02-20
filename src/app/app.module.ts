@@ -24,10 +24,18 @@ import {MatMenuModule} from '@angular/material/menu';
 // angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { TerminosYCondicionesComponent } from './terminos-y-condiciones/terminos-y-condiciones.component';
 import { AbouthUsComponent } from './abouth-us/abouth-us.component';
+import { API_URL } from './api.config';
+import { BillServiceService } from './services/bill-service.service';
+import { ClientService } from './services/client.service';
+import { ReservService } from './services/reserv.service';
+import { RoomService } from './services/room.service';
+import { AuthenticationService } from './services/authentication.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,8 +63,18 @@ import { AbouthUsComponent } from './abouth-us/abouth-us.component';
     ReactiveFormsModule,
     AppRoutingModule,
     MatMenuModule,
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: 'API_URL', useValue: API_URL },
+      {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    BillServiceService,
+    ClientService,
+    ReservService,
+    RoomService,
+    AuthenticationService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
