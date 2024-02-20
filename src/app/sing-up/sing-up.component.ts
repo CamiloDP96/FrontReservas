@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ClientService } from '../services/client.service';
 
 export function matchValuesValidator(field1: string, field2: string): ValidatorFn {
   return (formGroup: AbstractControl): ValidationErrors | null => {
@@ -26,22 +28,46 @@ export function matchValuesValidator(field1: string, field2: string): ValidatorF
 })
 export class SingUpComponent {
 
-  constructor(){}
+  signUpForm: FormGroup;
 
-  singUpForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    username: new FormControl('', Validators.required),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8)
-    ]),
-    password2: new FormControl('', Validators.required)
-  }, {
-    validators: matchValuesValidator('password', 'password2')
-  });
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private clientService: ClientService // Inject your service
+  ) {
+    this.signUpForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
+      password2: ['', Validators.required]
+    }, {
+      validators: matchValuesValidator('password', 'password2') // Use your custom validator if needed
+    });
+  }
+
+  onSubmit() {
+    if (this.signUpForm.invalid) {
+      return;
+    }
+
+    this.clientService.crearDato(this.signUpForm.value).subscribe(
+      (response) => {
+        console.log('Response from server:', response);
+        // Handle success response
+      },
+      (error) => {
+        console.error('Error:', error);
+        // Handle error
+      }
+    );
+  }
 }
 

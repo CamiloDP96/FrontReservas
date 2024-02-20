@@ -1,16 +1,13 @@
 <mat-card class="reserv-card margins">
     <mat-card-header>
-        <mat-card-title>room 101</mat-card-title>
-        <mat-card-subtitle>Standar</mat-card-subtitle>
+        <mat-card-title *ngIf="dataRoom">room {{dataRoom.room}} </mat-card-title>
+        <mat-card-subtitle *ngIf="dataRoom"> {{dataRoom.type}} </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src='/assets/standar.jpg' alt="Room Photo">
+    <img mat-card-image [src]="getImagePath(dataRoom?.type)" alt="Room Photo">
     <mat-card-content>
-        <div class="colums">
-            <div class="rows">
-                <p>Capacidad: 1 huesped</p>
-                <p>Precio por noche: $100</p>
-            </div>
-            <p>Benedicios: Wifi, TV, Aire Acondicionado, Mini Bar</p>
+        <div class="colums" *ngIf="dataRoom">
+            <p>Precio por noche: {{dataRoom.pricePerNigth}} </p>
+            <p>Beneficios: {{dataRoom.benefits}} </p>
         </div>
     </mat-card-content>
     <mat-card-actions class="rows">
