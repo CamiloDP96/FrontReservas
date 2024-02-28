@@ -1,19 +1,21 @@
-<mat-card class="reserv-card margins">
-    <mat-card-header>
-        <mat-card-title *ngIf="dataRoom">room {{dataRoom.room}} </mat-card-title>
-        <mat-card-subtitle *ngIf="dataRoom"> {{dataRoom.type}} </mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="getImagePath(dataRoom?.type)" alt="Room Photo">
-    <mat-card-content>
-        <div class="colums" *ngIf="dataRoom">
-            <p>Precio por noche: {{dataRoom.pricePerNigth}} </p>
-            <p>Beneficios: {{dataRoom.benefits}} </p>
-        </div>
-    </mat-card-content>
-    <mat-card-actions class="rows">
-        <a routerLink="/new-reservation">
-            <button class="secondary button margins">Reservar</button>
-        </a>
-        <button class="secondary button margins">Comentar</button>
-    </mat-card-actions>
-</mat-card>
+<div class="card-container">
+    <mat-card class="reserv-card margins" *ngFor="let room of rooms">
+        <mat-card-header>
+            <mat-card-title >room {{ room.room }} </mat-card-title>
+            <mat-card-subtitle> {{room.type}} </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="getImagePath(room.type)" alt="Room Photo">
+        <mat-card-content>
+            <div class="colums">
+                <p>Precio por noche: {{room.pricePerNight}} </p>
+                <p>Beneficios: {{room.benefits}} </p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="rows">
+            <a routerLink="/new-reservation">
+                <button class="secondary button margins">Reservar</button>
+            </a>
+            <button class="secondary button margins">Comentar</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

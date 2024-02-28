@@ -1,32 +1,44 @@
 <div class="colums margins">
     <span class="margins">Nueva Reserva</span>
-    <form [formGroup]="newReservForm" class="forms">
+    <form [formGroup]="newReservForm" class="forms" (submit)="onSubmit()">
         <div class="rows">
-            <div class="colums marginLeft marginRigth">
+            <div class="colums marginLeft marginRight">
                 Usuario <input
                 type="text"
                 class="form-control"
-                formContolName="username">
+                formControlName="username">
+                <label *ngIf="newReservForm.get('username')?.touched && newReservForm.get('username')?.errors?.['required']" class="error-message">
+                    El usuario es requerido.
+                </label>
                 Habitacion <input
                 type="text"
                 class="form-control"
                 formControlName="room">
+                <label *ngIf="newReservForm.get('room')?.touched && newReservForm.get('room')?.errors?.['required']" class="error-message">
+                    la habitacion es requerido.
+                </label>
+                <label *ngIf="newReservForm.get('room')?.touched && newReservForm.get('room')?.errors?.['pattern']" class="error-message">
+                    Este campo debe ser un número entero.
+                </label>
                 Forma de pago <input
                 type="text"
-                class="form-controler"
-                formControlerName="payMethod">
+                class="form-control"
+                formControlName="payMethod">
+                <label *ngIf="newReservForm.get('payMethod')?.touched && newReservForm.get('payMethod')?.errors?.['required']" class="error-message">
+                    la forma de pago es requerido.
+                </label>
             </div>
-            <div class="colums marginLeft marginRigth">
+            <div class="colums marginLeft marginRight">
                 Fecha llegada <input
                 type="date"
-                class="form-controler"
-                formCpntrolName="checkInDate">
+                class="form-control"
+                formControlName="checkInDate">
                 Fecha salida <input
                 type="date"
-                class="form-controler"
-                formControlerName="checkOutDate">
+                class="form-control"
+                formControlName="checkOutDate">
             </div>
         </div>
-            <button class="primary button" type="submit">Reservar</button>
-        </form>
-    </div>
+        <button class="primary button" type="submit" [disabled]="newReservForm.invalid">Reservar</button>
+    </form>
+</div>

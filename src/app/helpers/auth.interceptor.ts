@@ -20,7 +20,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (token) {
       const clonned = request.clone({
-        headers: request.headers.set('Authorization','Bearer ${token}')
+        setHeaders: {
+          'Authorization': `Bearer ${token}` // Usa comillas invertidas para interpolación de cadenas
+        }
       })
       return next.handle(clonned);
     }

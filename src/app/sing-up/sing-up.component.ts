@@ -68,6 +68,7 @@ export class SingUpComponent {
         // Handle error
       }
     );
+    alert('Registro completado')
   }
 }
 

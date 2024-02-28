@@ -1,20 +1,20 @@
-<mat-card class="reserv-card margins">
+<div class="card-container">
+    <mat-card class="reserv-card margins" *ngFor="let bill of dataBill">
     <mat-card-header>
-        <mat-card-title>Reservacion 1</mat-card-title>
+        <mat-card-title>Reservacion {{ bill.reserv.id }}</mat-card-title>
         <mat-card-subtitle>Usuario</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="dataBill && dataReserv && dataRoom">
-        <p>Tipo de habitacion: {{dataRoom.type}} </p>
-        <p>Precio por noche: {{dataRoom.procePerNigth}} </p>
-        <p>Tiempo Hospedado: {{dataBill.days}} </p>
-        <p>Fecha de ingreso: {{dataReserv.checkIn}} </p>
-        <p>Fecha de salida: {{dataReserv.checkOut}} </p>
-        <p>Total: {{dataBill.total_amounth}} </p>
+    <mat-card-content>
+        <p>Tipo de habitacion: {{ bill.reserv.room.type }}</p>
+        <p>Precio por noche: {{ bill.reserv.room.pricePerNight }}</p>
+        <p>Tiempo Hospedado: {{ bill.reserv.checkIn }} - {{ bill.reserv.checkOut }}</p>
+        <p>Total: {{ bill.total_amount }}</p>
     </mat-card-content>
     <mat-card-actions class="colums">
         <div>
-            <button class="primary button marginTop">Descargar factura</button>
+        <button class="primary button marginTop">Descargar factura</button>
         </div>
     </mat-card-actions>
     <p class="info marginLeft">Se enviara la factura por correo electronico</p>
-</mat-card>
+    </mat-card>
+</div>

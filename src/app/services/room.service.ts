@@ -1,35 +1,42 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Room } from '../interfaces/room';
+import { token } from '../api.config';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
 
-  constructor(private http: HttpClient, @Inject('API_URL') private baseUrl:string) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthenticationService, // Inyecta el servicio de autenticación
+    @Inject('API_URL') private baseUrl: string
+  ) { }
 
   // GET
-  obtenerDatos(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/room/roomList/0/10`);
+  obtenerDatos(): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.baseUrl}/room/roomList/0/10`);
   }
 
-  obtenerDatoPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/room/${id}`);
+  obtenerDatoPorId(id: number): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.baseUrl}/room/${id}`);
   }
 
   // PUT
-  actualizarDato(id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/room/updateRoom/${id}`, data);
+  actualizarDato(id: number, data: any): Observable<Room[]> {
+    return this.http.put<Room[]>(`${this.baseUrl}/room/updateRoom/${id}`, data);
   }
 
   // POST
-  crearDato(data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/room/createRoom`, data);
+  crearDato(data: any): Observable<Room[]> {
+    return this.http.post<Room[]>(`${this.baseUrl}/room/createRoom`, data);
   }
 
   // DELETE
-  eliminarDato(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/room/deleteRoom/${id}`);
+  eliminarDato(id: number): Observable<Room[]> {
+    return this.http.delete<Room[]>(`${this.baseUrl}/room/deleteRoom/${id}`);
   }
 }

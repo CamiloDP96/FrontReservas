@@ -1,22 +1,24 @@
-<mat-card class="reserv-card margins">
+<div class="card-container">
+    <mat-card class="reserv-card margins" *ngFor="let reserv of dataReserv">
     <mat-card-header>
-        <mat-card-title *ngIf="dataReserv">Reservacion {{dataReserv.id}} </mat-card-title>
-        <mat-card-subtitle *ngIf="dataRoom">Habitacion {{dataRoom.room}} </mat-card-subtitle>
+        <mat-card-title>Reservacion {{ reserv.id }}</mat-card-title>
+        <mat-card-subtitle>Habitacion {{ reserv.room.room }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="getImagePath(dataRoom?.type)" alt="Room Photo">
+    <img mat-card-image [src]="getImagePath(reserv.room.type)" alt="Room Photo">
     <mat-card-content>
-        <div class="colums" *ngIf="dataBill && dataReserv && dataRoom">
-                <p>tipo de habitacion: {{dataRoom.type}} </p>
-                <p>Precio por noche: {{dataRoom.pricePerNigth}} </p>
-                <p>Tiempo Hospedado: {{dataBill.days}} </p>
-                <p>Estado de la reserva: {{dataReserv.state}} </p>
-                <p>Fecha de ingreso: {{dataReserv.checkIn}} </p>
+        <div class="columns">
+        <p>Tipo de habitacion: {{ reserv.room.type }}</p>
+        <p>Precio por noche: {{ reserv.room.pricePerNight }}</p>
+        <p *ngFor="let bill of dataBill">Tiempo Hospedado: {{ bill.days }}</p>
+        <p>Estado de la reserva: {{ reserv.state }}</p>
+        <p>Fecha de ingreso: {{ reserv.checkIn }}</p>
         </div>
     </mat-card-content>
     <mat-card-actions class="rows">
         <button class="secondary button margins">Cancelar</button>
         <a routerLink="/new-reservation">
-            <button class="secondary button margins">Editar</button>
+        <button class="secondary button margins">Editar</button>
         </a>
     </mat-card-actions>
-</mat-card>
+    </mat-card>
+</div>

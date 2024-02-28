@@ -1,64 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BillServiceService } from '../services/bill-service.service';
 import { ReservService } from '../services/reserv.service';
 import { RoomService } from '../services/room.service';
+import { Room } from '../interfaces/room';
 
 @Component({
   selector: 'app-reservation-card',
   templateUrl: './reservation-card.component.html',
   styleUrls: ['./reservation-card.component.css']
 })
-export class ReservationCardComponent {
-  dataBill: any;
-  dataRoom: any;
-  dataReserv: any;
+export class ReservationCardComponent  implements OnInit {
+  rooms: Room[] = [];
 
   constructor(
-    private billService: BillServiceService,
-    private roomService: RoomService,
-    private reservService: ReservService
+    private roomService: RoomService
     ) { }
 
   ngOnInit(): void {
-    this.billService.obtenerDatos().subscribe(data => {
-      this.dataBill = data;
-    });
 
-    this.billService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataBill = data;
-    });
-
-    this.roomService.obtenerDatos().subscribe(data => {
-      this.dataRoom = data;
-    });
-
-    this.roomService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataRoom = data;
-    });
-    this.reservService.obtenerDatos().subscribe(data => {
-      this.dataReserv = data;
-    });
-
-    this.reservService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataReserv = data;
-    });
+    this.roomService.obtenerDatos().subscribe(
+      (data: Room[]) => {
+        this.rooms = data;
+      }
+    );
   }
 
   getImagePath(type: string): string {
     switch (type) {
       case 'standard':
+      case 'Standard':
+      case 'STANDARD':
         return '/assets/standar.jpg';
       case 'standard double':
+      case 'Standard Double':
+      case 'STANDARD DOUBLE':
         return '/assets/standar-double.jpg';
       case 'Royal':
+      case 'ROYAL':
         return '/assets/Royal.jpg';
       case 'double':
+      case 'Double':
+      case 'DOUBLE':
         return '/assets/double.jpg';
       case 'double balcon':
+      case 'Double Balcon':
+      case 'DOUBLE BALCON':
         return '/assets/double-balcon.jpg';
       // Agrega más casos según sea necesario para los demás tipos de habitación
       default:
-        return '/assets/default.jpg'; // Si no coincide con ninguno de los casos anteriores, carga una imagen predeterminada
+        return '/assets/default.jpg';
     }
   }
 

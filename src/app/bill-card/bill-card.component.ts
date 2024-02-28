@@ -1,46 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BillServiceService } from '../services/bill-service.service';
 import { RoomService } from '../services/room.service';
 import { ReservService } from '../services/reserv.service';
+import { Bill } from '../interfaces/bill';
+import { Reserv } from '../interfaces/reserv';
+import { Room } from '../interfaces/room';
+import { ClientService } from '../services/client.service';
+import { Client } from '../interfaces/client';
 
 @Component({
   selector: 'app-bill-card',
   templateUrl: './bill-card.component.html',
   styleUrls: ['./bill-card.component.css']
 })
-export class BillCardComponent {
-  dataBill: any;
-  dataRoom: any;
-  dataReserv: any;
+export class BillCardComponent implements OnInit {
+  dataBill: Bill[] = [];
+  dataRoom: Room[] = [];
+  dataReserv: Reserv[] = [];
+  dataClient: Client[] = [];
 
   constructor(
     private billService: BillServiceService,
     private roomService: RoomService,
-    private reservService: ReservService
-    ) { }
+    private reservService: ReservService,
+    private clientService: ClientService
+  ) { }
 
   ngOnInit(): void {
-    this.billService.obtenerDatos().subscribe(data => {
+    // Obtener datos de las facturas
+    this.billService.obtenerDatos().subscribe((data: Bill[]) => {
       this.dataBill = data;
     });
 
-    this.billService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataBill = data;
-    });
-
-    this.roomService.obtenerDatos().subscribe(data => {
+    // Obtener datos de las habitaciones
+    this.roomService.obtenerDatos().subscribe((data: Room[]) => {
       this.dataRoom = data;
     });
 
-    this.roomService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataRoom = data;
-    });
-    this.reservService.obtenerDatos().subscribe(data => {
+    // Obtener datos de las reservas
+    this.reservService.obtenerDatos().subscribe((data: Reserv[]) => {
       this.dataReserv = data;
     });
 
-    this.reservService.obtenerDatoPorId(1).subscribe(data => {
-      this.dataReserv = data;
+    // Obtener datos de los clientes
+    this.clientService.obtenerDatos().subscribe((data: Client[]) => {
+      this.dataClient = data;
     });
+  }
+
+  getImagePath(type: string): string {
+    switch (type) {
+      case 'standard':
+      case 'Standard':
+      case 'STANDARD':
+        return '/assets/standar.jpg';
+      case 'standard double':
+      case 'Standard Double':
+      case 'STANDARD DOUBLE':
+        return '/assets/standar-double.jpg';
+      case 'Royal':
+      case 'ROYAL':
+        return '/assets/Royal.jpg';
+      case 'double':
+      case 'Double':
+      case 'DOUBLE':
+        return '/assets/double.jpg';
+      case 'double balcon':
+      case 'Double Balcon':
+      case 'DOUBLE BALCON':
+        return '/assets/double-balcon.jpg';
+      // Agrega más casos según sea necesario para los demás tipos de habitación
+      default:
+        return '/assets/default.jpg';
+    }
   }
 }

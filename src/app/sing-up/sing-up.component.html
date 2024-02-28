@@ -1,39 +1,77 @@
 <div class="colums marginTop5 background">
     <Span>Registrate</Span>
     <form [formGroup]="signUpForm" class="forms marginTop padding">
-        <div>
-            Nombre <input
-            [class.is-invalid]="signUpForm.get('name')?.touched && signUpForm.get('name')?.invalid"
-            type="text"
-            class="form-control"
-            formControlerName="name">
-            Usuario <input
-            [class.is-invalid]="signUpForm.get('username')?.touched && signUpForm.get('username')?.invalid"
-            type="text"
-            class="form-control"
-            formControlerName="username">
-            Contraseña <input
-            [class.is-invalid]="signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid"
-            type="password"
-            class="form-control"
-            formControlerName="password">
+        <div class="grid">
+            <div>
+                Nombre
+                <input
+                type="text"
+                class="form-control"
+                formControlName="name">
+                <div class="error">
+                    <label *ngIf="signUpForm.get('name')?.touched && signUpForm.get('name')?.errors?.['required']" class="error-message">
+                        El nombre es requerido.
+                    </label>
+                </div>
+            </div>
+            <div>
+                Usuario <input
+                type="text"
+                class="form-control"
+                formControlName="username">
+                <div class="error">
+                    <label *ngIf="signUpForm.get('username')?.touched && signUpForm.get('username')?.errors?.['required']" class="error-message">
+                        El Usuario es requerido.
+                    </label>
+                </div>
+            </div>
+            <div>
+                Contraseña <input
+                type="password"
+                class="form-control"
+                formControlName="password">
+                <div>
+                    <label *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['required']" class="error-message">
+                        La Contraseña es requerida.
+                    </label>
+                </div>
+            </div>
         </div>
-        <div>
-            Apellido <input
-            [class.is-invalid]="signUpForm.get('lastname')?.touched && signUpForm.get('lastname')?.invalid"
-            type="text"
-            class="form-control"
-            formControlerName="lastname">
-            email <input
-            [class.is-invalid]="signUpForm.get('email')?.touched && signUpForm.get('email')?.invalid"
-            type="text"
-            class="form-control"
-            formControlerName="email">
-            Repita la Contraseña <input
-            [class.is-invalid]="signUpForm.get('password2')?.touched && signUpForm.get('password2')?.invalid"
-            type="password"
-            class="form-control"
-            formControlerName="password2">
+        <div class="grid">
+            <div>
+                Apellido <input
+                type="text"
+                class="form-control"
+                formControlName="lastname">
+                <div>
+                    <label *ngIf="signUpForm.get('lastname')?.touched && signUpForm.get('lastname')?.errors?.['required']" class="error-message">
+                        El apellido es requerido.
+                    </label>
+                </div>
+            </div>
+            <div>
+                Email <input
+                type="text"
+                class="form-control"
+                formControlName="email">
+                <div>
+                    <label *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.errors?.['required']" class="error-message">
+                        El email es requerido.
+                    </label>
+                </div>
+            </div>
+            <div class="rows">
+                <label>Repetir la Contraseña</label>
+                <input
+                type="password"
+                class="form-control"
+                formControlName="password2">
+            </div>
+                <div>
+                    <label *ngIf="signUpForm.get('password2')?.touched && signUpForm.get('password2')?.errors?.['matchValues']" class="error-message">
+                        Las contraseñas no coinciden.
+                    </label>
+                </div>
         </div>
         <button class="primary button" type="submit">Registrarse</button>
         <p class="info">

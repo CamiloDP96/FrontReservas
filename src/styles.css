@@ -11,6 +11,7 @@
   --font-size-third: 14px;
   --text-primary-color: #3D3B40;
   --text-subtext-color: #BFCFE7;
+  --text-error-color: #f26565;
   --botton-background-color: rgba(248, 237, 255,1);
   --secondary-botton-background-color: #BFCFE7;
   --background-color-base: rgba(240, 240, 240, 0);
@@ -208,4 +209,20 @@ span {
   background-color: var(--background-color-optional-two);
 }
 
+.error-message{
+  color: var(--text-error-color);
+}
 
+.error {
+  text-align: justify;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Ajusta el espacio entre las tarjetas */
+}

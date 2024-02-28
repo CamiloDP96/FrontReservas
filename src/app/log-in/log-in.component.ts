@@ -23,13 +23,20 @@ export class LogInComponent {
 
   login(form: NgForm) {
     if (form.valid) {
-      // Serializar los datos del formulario a JSON
       const body = JSON.stringify(this.creds);
-      // Enviar la solicitud HTTP al servicio de autenticación
       this.authService.login(body)
         .subscribe(response => {
           this.router.navigate(['']);
-        });
+          alert('Login Completado');
+        },
+        error => {
+          if (error.status === 403) {
+            alert('Acceso denegado. Verifica tus credenciales.');
+          } else {
+            alert('Error en el inicio de sesión. Por favor, inténtalo de nuevo más tarde.');
+          }
+        }
+        );
     }
   }
 }
